@@ -1,0 +1,82 @@
+{
+    "variables":
+    {
+        "os_name": "",
+        "iso_url": "",
+        "iso_checksum": "",
+        "iso_checksum_type": "",
+        "guest_os_type_vbox": "",
+        "guest_os_type_vmware_fusion": "",
+        "guest_os_type_vmware_workstation": "",
+        "phase_current": "01base",
+        "headless": "",
+        "winrm_username": "",
+        "winrm_password": ""
+    },
+
+    "builders": [
+        {
+            "name": "virtualbox",
+            "type": "virtualbox-iso",
+            "iso_url": "{{user `iso_url`}}",
+            "iso_checksum": "{{user `iso_checksum`}}",
+            "iso_checksum_type": "{{user `iso_checksum_type`}}",
+            "vboxmanage": [
+                [ "modifyvm", "{{.Name}}", "--memory", "4096" ],
+                [ "modifyvm", "{{.Name}}", "--cpus", "2" ]
+            ],
+            "guest_os_type": "{{user `guest_os_type_vbox`}}",
+            "guest_additions_mode": "attach",
+            "headless": "{{user `headless`}}",
+            "communicator": "winrm",
+            "winrm_username": "{{user `winrm_username`}}",
+            "winrm_password": "{{user `winrm_password`}}",
+            "winrm_timeout": "12h",
+            "shutdown_command": "shutdown /s /t 10 /f /d p:4:1 /c \"packer {{user `phase_current`}} shutdown\"",
+            "shutdown_timeout": "1h",
+            "floppy_files": [
+                "files/{{user `os_name`}}/Autounattend.xml",
+                "files/winrm.ps1"
+            ],
+            "output_directory": "output/{{user `os_name`}}-vbox-{{user `phase_current`}}/",
+            "vm_name": "{{user `os_name`}}-vbox-{{user `phase_current`}}"
+        }
+    ],
+
+    "provisioners": [
+        {
+            "type": "powershell",
+            "script": "scripts/perform_dotnet_optimization.ps1",
+            "elevated_user": "{{user `winrm_username`}}",
+            "elevated_password": "{{user `winrm_password`}}",
+            "pause_before": "20s"
+        },
+        {
+            "type": "powershell",
+            "script": "scripts/install_vbox_guest_additions.ps1",
+            "elevated_user": "{{user `winrm_username`}}",
+            "elevated_password": "{{user `winrm_password`}}",
+            "only": ["virtualbox"],
+            "pause_before": "1m"
+        },
+        {
+            "type": "windows-restart",
+            "restart_timeout": "15m",
+            "pause_before": "1m"
+        },
+        {
+            "type": "windows-restart",
+            "restart_timeout": "15m",
+            "pause_before": "1m"
+        }
+    ],
+
+    "post-processors": [
+        {
+            "type": "vagrant",
+            "keep_input_artifact": true,
+            "output": "output/box-file-{{.Provider}}/{{ user `os_name` }}-{{.Provider}}-{{user `phase_current`}}.box",
+            "vagrantfile_template": "files/vagrantfile"
+        }
+    ]
+}
