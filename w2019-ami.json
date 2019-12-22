@@ -1,0 +1,50 @@
+{
+    "builders": [
+        {
+            "name": "ami",
+            "type": "amazon-ebs",
+            "profile": "default",
+            "region": "us-east-2",
+            "instance_type": "t2.micro",
+            "source_ami_filter": {
+                "filters": { "name": "Windows_Server-2019-English-Full-Base-*" },
+                "owners": ["amazon"],
+                "most_recent": true
+            },
+            "security_group_filter": {
+                "filters": {
+                    "tag:project": "packer",
+                    "tag:platform": "windows_server",
+                    "tag:version": "2019gui"
+                }
+            },
+            "ami_name": "packer-{{isotime | clean_resource_name}}",
+            "user_data_file": "scripts/user_data.ps1",
+            "communicator": "winrm",
+            "winrm_username": "Administrator",
+            "winrm_timeout": "10m",
+            "winrm_use_ssl": false,
+            "winrm_insecure": true,
+            "tags": {
+                "project": "packer",
+                "platform": "windows_server",
+                "version": "2019gui"
+            }
+        }
+    ],
+
+    "provisioners": [
+        {
+            "type": "powershell",
+            "script": "scripts/config_firewall.ps1"
+        },
+        {
+            "type": "powershell",
+            "inline": [
+                "C:\\ProgramData\\Amazon\\EC2-Windows\\Launch\\Scripts\\InitializeInstance.ps1 -Schedule",
+                "C:\\ProgramData\\Amazon\\EC2-Windows\\Launch\\Scripts\\SysprepInstance.ps1 -NoShutdown"
+            ]
+        }
+    ]
+
+}
