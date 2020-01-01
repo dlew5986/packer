@@ -27,9 +27,6 @@ $WinRmHttpsParams = @{
 }
 New-NetFirewallRule @WinRmHttpsParams | Out-Null
 
-# config winrm for packer - basic auth must be enabled
-winrm set winrm/config/service/auth '@{Basic="true"}'
-
 # remove winrm http listener
 $removeWinRmListenerParams = @{
     ResourceURI = "winrm/config/listener"
