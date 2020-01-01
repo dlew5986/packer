@@ -4,8 +4,10 @@
 startDateTimeStamp=$(date +%FT%TE)
 start=$SECONDS
 
-# 01base
+# validate
 packer validate ./w2019-ami.json
+
+# build
 packer build -force ./w2019-ami.json
 end=$SECONDS
 

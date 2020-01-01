@@ -3,19 +3,6 @@
 # disable the default firewall rules for WinRM
 Disable-NetFirewallRule - DisplayGroup "Windows Remote Managment" -Confirm:$false
 
-<#
-# new firewall rule to allow WinRM 5985/tcp inbound
-$WinRmHttpParams = @{
-    DisplayName = "allow WinRM inbound on 5985/tcp"
-    Direction = "Inbound"
-    Protocol = "tcp"
-    LocalPort = 5985
-    RemoteAddress = "Any"
-    Action = "Allow"
-}
-New-NetFirewallRule @WinRmHttpParams | Out-Null
-#>
-
 # new firewall rule to allow WinRM 5986/tcp inbound
 $WinRmHttpsParams = @{
     DisplayName = "allow WinRM inbound on 5986/tcp"
