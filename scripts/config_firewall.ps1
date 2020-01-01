@@ -12,7 +12,7 @@ New-NetFirewallRule @ICMPv4echoParams | Out-Null
 
 # new firewall rule to allow RDP 3389/tcp inbound
 $RdpTcpParams = @{
-    DisplayName = "allow RDP inbound (3389/tcp)"
+    DisplayName = "allow RDP inbound on 3389/tcp"
     Direction = "Inbound"
     Protocol = "tcp"
     LocalPort = 3389
@@ -23,7 +23,7 @@ New-NetFirewallRule @RdpTcpParams | Out-Null
 
 # new firewall rule to allow RDP 3389/udp inbound
 $RdpUdpParams = @{
-    DisplayName = "allow RDP inbound (3389/udp)"
+    DisplayName = "allow RDP inbound on 3389/udp"
     Direction = "Inbound"
     Protocol = "udp"
     LocalPort = 3389
@@ -42,4 +42,5 @@ $displayGroupsToDisable = @(
     "Remote Desktop"
     "Windows Remote Management"
 )
-Get-NetFirewallRule -DisplayGroup $displayGroupsToDisable | Set-NetFirewallRule -Enabled "False" -Confirm:$false
+#Get-NetFirewallRule -DisplayGroup $displayGroupsToDisable | Set-NetFirewallRule -Enabled "False" -Confirm:$false
+Disable-NetFirewallrule -DisplayGroup $displayGroupsToDisable -Confirm:$false

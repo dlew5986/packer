@@ -23,7 +23,7 @@
             "communicator": "winrm",
             "winrm_username": "Administrator",
             "winrm_timeout": "10m",
-            "winrm_use_ssl": false,
+            "winrm_use_ssl": true,
             "winrm_insecure": true,
             "tags": {
                 "project": "packer",
