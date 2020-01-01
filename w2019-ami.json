@@ -25,6 +25,7 @@
             "winrm_timeout": "10m",
             "winrm_use_ssl": true,
             "winrm_insecure": true,
+            "winrm_use_ntlm": true,
             "tags": {
                 "project": "packer",
                 "platform": "windows_server",
