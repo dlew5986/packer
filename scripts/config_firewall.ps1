@@ -42,5 +42,4 @@ $displayGroupsToDisable = @(
     "Remote Desktop"
     "Windows Remote Management"
 )
-#Get-NetFirewallRule -DisplayGroup $displayGroupsToDisable | Set-NetFirewallRule -Enabled "False" -Confirm:$false
 Disable-NetFirewallrule -DisplayGroup $displayGroupsToDisable -Confirm:$false

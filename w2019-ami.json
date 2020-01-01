@@ -18,7 +18,7 @@
                     "tag:version": "2019gui"
                 }
             },
-            "ami_name": "packer-{{isotime | clean_resource_name}}",
+            "ami_name": "packer-ws2019gui-{{isotime | clean_resource_name}}",
             "user_data_file": "scripts/user_data.ps1",
             "communicator": "winrm",
             "winrm_username": "Administrator",
