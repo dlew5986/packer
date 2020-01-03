@@ -1,4 +1,9 @@
 {
+    "variables":
+        {
+            "source_cidr": ""
+        },
+
     "builders": [
         {
             "name": "ami",
@@ -18,6 +23,7 @@
             "winrm_use_ssl": true,
             "winrm_insecure": true,
             "winrm_use_ntlm": true,
+            "temporary_security_group_source_cidrs": ["{{user `source_cidr`}}"],
             "tags": {
                 "project": "packer",
                 "platform": "windows_server",
