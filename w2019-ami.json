@@ -22,7 +22,14 @@
             "tags": {
                 "project": "packer",
                 "platform": "windows_server",
-                "version": "2019gui"
+                "version": "2019gui",
+                "created": "{{isotime | clean_resource_name}}"
+            },
+            "snapshot_tags": {
+                "project": "packer",
+                "platform": "windows_server",
+                "version": "2019gui",
+                "created": "{{isotime | clean_resource_name}}"
             }
         }
     ],
