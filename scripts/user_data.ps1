@@ -5,12 +5,12 @@ Disable-NetFirewallRule - DisplayGroup "Windows Remote Managment" -Confirm:$fals
 
 # new firewall rule to allow WinRM 5986/tcp inbound
 $WinRmHttpsParams = @{
-    DisplayName = "allow WinRM inbound on 5986/tcp"
-    Direction = "Inbound"
-    Protocol = "tcp"
-    LocalPort = 5986
+    DisplayName   = "allow WinRM inbound on 5986/tcp"
+    Direction     = "Inbound"
+    Protocol      = "tcp"
+    LocalPort     = 5986
     RemoteAddress = "Any"
-    Action = "Allow"
+    Action        = "Allow"
 }
 New-NetFirewallRule @WinRmHttpsParams | Out-Null
 
@@ -18,7 +18,7 @@ New-NetFirewallRule @WinRmHttpsParams | Out-Null
 $removeWinRmListenerParams = @{
     ResourceURI = "winrm/config/listener"
     SelectorSet = @{
-        Address = "*"
+        Address   = "*"
         Transport = "http"
     }
 }
@@ -27,12 +27,12 @@ Remove-WSManInstance @removeWinRmListenerParams
 # create self-signed cert
 $selfSignedCertParams = @{
     CertStoreLocation = "Cert:\LocalMachine\My"
-    DnsName = "packer-ami"
-    HashAlgorith = "sha256"
-    KeyAlgorithm = "RSA"
-    KeyLength = 4096
-    KeyUsage = "DigitalSignature","KeyEncipherment"
-    NotAfter = (Get-Date).AddMonths(3)
+    DnsName           = "packer-ami"
+    HashAlgorith      = "sha256"
+    KeyAlgorithm      = "RSA"
+    KeyLength         = 4096
+    KeyUsage          = "DigitalSignature","KeyEncipherment"
+    NotAfter          = (Get-Date).AddMonths(3)
 }
 $selfSignedCert = New-SelfSignedCertificate @selfSignedCertParams
 
@@ -40,7 +40,7 @@ $selfSignedCert = New-SelfSignedCertificate @selfSignedCertParams
 $newWinRmListenerParams = @{
     ResourceURI = "winrm/config/listener"
     SelectorSet = @{
-        Address = "*"
+        Address   = "*"
         Transport = "https"
     }
     ValueSet = @{
