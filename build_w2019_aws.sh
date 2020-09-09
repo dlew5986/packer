@@ -13,10 +13,10 @@ cidr=$ip/32
 echo "cidr = ${cidr}"
 
 # validate
-packer validate -var "source_cidr=${cidr}" ./w2019_ami.json
+packer validate -var "source_cidr=${cidr}" ./w2019_aws.json
 
 # build
-packer build -var "source_cidr=${cidr}" -force ./w2019_ami.json
+packer build -var "source_cidr=${cidr}" -force ./w2019_aws.json
 
 # record end and calculate runtime duration
 end=$SECONDS
