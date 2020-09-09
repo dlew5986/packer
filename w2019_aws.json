@@ -10,31 +10,33 @@
             "type": "amazon-ebs",
             "profile": "default",
             "region": "us-east-2",
+
+            "ami_name": "packer-ws2019gui-{{isotime | clean_resource_name}}",
             "instance_type": "t2.micro",
             "source_ami_filter": {
                 "filters": { "name": "Windows_Server-2019-English-Full-Base-*" },
                 "owners": ["amazon"],
                 "most_recent": true
             },
-            "ami_name": "packer-ws2019gui-{{isotime | clean_resource_name}}",
+            "temporary_security_group_source_cidrs": ["{{user `source_cidr`}}"],
             "user_data_file": "scripts/user_data.ps1",
+
             "communicator": "winrm",
             "winrm_username": "Administrator",
             "winrm_use_ssl": true,
             "winrm_insecure": true,
             "winrm_use_ntlm": true,
-            "temporary_security_group_source_cidrs": ["{{user `source_cidr`}}"],
+
             "tags": {
+                "Name": "packer",
                 "project": "packer",
                 "platform": "windows_server",
-                "version": "2019gui",
-                "created": "{{isotime | clean_resource_name}}"
+                "version": "2019"
             },
             "snapshot_tags": {
                 "project": "packer",
                 "platform": "windows_server",
-                "version": "2019gui",
-                "created": "{{isotime | clean_resource_name}}"
+                "version": "2019"
             }
         }
     ],
