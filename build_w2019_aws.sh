@@ -1,4 +1,4 @@
-#!/bin/zsh
+#!/bin/bash
 
 # record start
 startDateTimeStamp=$(date +%FT%T)
