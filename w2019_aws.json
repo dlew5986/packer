@@ -11,7 +11,7 @@
             "profile": "default",
             "region": "us-east-2",
 
-            "ami_name": "packer-ws2019gui-{{isotime | clean_resource_name}}",
+            "ami_name": "packer-Windows_Server-2019-English-Full-Base-{{isotime | clean_resource_name}}",
             "instance_type": "t2.micro",
             "source_ami_filter": {
                 "filters": { "name": "Windows_Server-2019-English-Full-Base-*" },
