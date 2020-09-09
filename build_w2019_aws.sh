@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# exit immediately if a command returns a non-zero status
+set -e
+
 # record start
 startDateTimeStamp=$(date +%FT%T)
 start=$SECONDS
