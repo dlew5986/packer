@@ -1,7 +1,7 @@
 <powershell>
 
 # disable the default firewall rules for WinRM
-Disable-NetFirewallRule - DisplayGroup "Windows Remote Managment" -Confirm:$false
+Disable-NetFirewallRule -DisplayGroup 'Windows Remote Management' -Confirm:$false
 
 # new firewall rule to allow WinRM 5986/tcp inbound
 $WinRmHttpsParams = @{
