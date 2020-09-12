@@ -36,7 +36,8 @@
             "shutdown_command": "C:/Windows/Panther/Unattend/sysprep_shutdown.cmd",
             "shutdown_timeout": "1h",
 
-            "output_directory": "output/{{user `vm_name`}}"
+            "output_directory": "output/vm_files",
+            "vm_name": "w2019_vbox_{{isotime \"2006-01-02\"}}"
         }
     ],
 
@@ -81,7 +82,7 @@
         {
             "type": "vagrant",
             "keep_input_artifact": true,
-            "output": "output/box-file-w2019-{{.Provider}}.box",
+            "output": "output/box-files/w2019-{{.Provider}}_{{isotime \"2006-01-02\"}}.box",
             "vagrantfile_template": "files/vagrantfile"
         }
     ]
