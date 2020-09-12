@@ -36,8 +36,7 @@
             "shutdown_command": "C:/Windows/Panther/Unattend/sysprep_shutdown.cmd",
             "shutdown_timeout": "1h",
 
-            "output_directory": "output/vm_files",
-            "vm_name": "w2019_vbox_{{isotime \"2006-01-02\"}}"
+            "output_directory": "output"
         }
     ],
 
@@ -81,8 +80,8 @@
     "post-processors": [
         {
             "type": "vagrant",
-            "keep_input_artifact": true,
-            "output": "output/box-files/w2019-{{.Provider}}_{{isotime \"2006-01-02\"}}.box",
+            "keep_input_artifact": false,
+            "output": "output/box_file_w2019_{{.Provider}}_{{isotime \"2006-01-02\"}}.box",
             "vagrantfile_template": "files/vagrantfile"
         }
     ]
