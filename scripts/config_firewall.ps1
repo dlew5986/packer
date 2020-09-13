@@ -1,3 +1,4 @@
+#Requires -RunAsAdministrator
 
 # new firewall rule to allow ICMPv4 echo inbound
 $IcmpEchoParams = @{
