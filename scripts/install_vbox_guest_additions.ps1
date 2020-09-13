@@ -1,4 +1,6 @@
 
+#Requires -RunAsAdministrator
+
 if (Test-Path 'D:/VBoxWindowsAdditions.exe')
 {
     Get-ChildItem D:\cert\ -Filter vbox*.cer | ForEach-Object { D:\cert\VBoxCertUtil.exe add-trusted-publisher $_.FullName --root $_.FullName }

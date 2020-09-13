@@ -1,3 +1,5 @@
+#Requires -RunAsAdministrator
+
 # Script to force the .NET Framework optimization service to run at maximum speed.
 # Downloaded from <link below> on 11/6/2017
 #   https://github.com/Microsoft/dotnet/blob/master/tools/DrainNGENQueue/DrainNGenQueue.ps

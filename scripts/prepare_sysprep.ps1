@@ -1,3 +1,4 @@
+#Requires -RunAsAdministrator
 
 # create Unattend folder if it does not already exist
 if ( -not (Test-Path -Path 'C:\Windows\Panther\Unattend') )

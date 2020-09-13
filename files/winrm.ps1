@@ -1,3 +1,4 @@
+#Requires -RunAsAdministrator
 
 # disable the default firewall rules for WinRM
 Disable-NetFirewallRule -DisplayGroup 'Windows Remote Management' -Confirm:$false
