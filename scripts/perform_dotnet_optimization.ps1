@@ -13,57 +13,44 @@
 #
 
 # create filter to add a date/time stamp to outputs
-filter timestamp {"$(Get-Date -Format "yyyy-MM-dd HH:mm:ss"): $_"}
+filter timestamp {"$(Get-Date -Format 'yyyy-MM-dd HH:mm:ss'): $_"}
 
 
-Write-Output "Starting dotnet optimization script..." | timestamp
+Write-Output 'Starting dotnet optimization script...' | timestamp
 
 $isWin8Plus = [Environment]::OSVersion.Version -ge (new-object 'Version' 6,2)
-$dotnetDir = [Environment]::GetEnvironmentVariable("windir","Machine") + "\Microsoft.NET\Framework"
-$dotnet2 = "v2.0.50727"
-$dotnet4 = "v4.0.30319"
+$dotnetDir = [Environment]::GetEnvironmentVariable('windir','Machine') + '\Microsoft.NET\Framework'
+$dotnet2 = 'v2.0.50727'
+$dotnet4 = 'v4.0.30319'
 
-$dotnetVersion = if (Test-Path ($dotnetDir + "\" + $dotnet4 + "\ngen.exe")) {$dotnet4} else {$dotnet2}
+$dotnetVersion = if (Test-Path ($dotnetDir + '\' + $dotnet4 + '\ngen.exe')) {$dotnet4} else {$dotnet2}
 
-$ngen32 = $dotnetDir + "\" + $dotnetVersion +"\ngen.exe"
-$ngen64 = $dotnetDir + "64\" + $dotnetVersion +"\ngen.exe"
-$ngenArgs = " executeQueuedItems"
+$ngen32 = $dotnetDir + '\' + $dotnetVersion +'\ngen.exe'
+$ngen64 = $dotnetDir + '64\' + $dotnetVersion +'\ngen.exe'
+$ngenArgs = ' executeQueuedItems'
 $is64Bit = Test-Path $ngen64
 
 
 #32-bit NGEN -- appropriate for 32-bit and 64-bit machines
-Write-Output "Requesting 32-bit NGEN" | timestamp
+Write-Output 'Requesting 32-bit NGEN' | timestamp
 Start-Process -wait $ngen32 -ArgumentList $ngenArgs
 
 #64-bit NGEN -- appropriate for 64-bit machines
 if ($is64Bit) {
-    Write-Output "Requesting 64-bit NGEN" | timestamp
+    Write-Output 'Requesting 64-bit NGEN' | timestamp
     Start-Process -wait $ngen64 -ArgumentList $ngenArgs
 }
 
 #AutoNGEN for Windows 8+ machines
 if ($isWin8Plus) {
-    Write-Output "Requesting 32-bit AutoNGEN -- Windows 8+" | timestamp
-    schTasks /run /Tn "\Microsoft\Windows\.NET Framework\.NET Framework NGEN v4.0.30319"
+    Write-Output 'Requesting 32-bit AutoNGEN -- Windows 8+' | timestamp
+    schTasks /run /Tn '\Microsoft\Windows\.NET Framework\.NET Framework NGEN v4.0.30319'
 }
 
 #64-bit AutoNGEN for Windows 8+ machines
 if ($isWin8Plus -and $is64Bit) {
-    Write-Output "Requesting 64-bit AutoNGEN -- Windows 8+" | timestamp
-    schTasks /run /Tn "\Microsoft\Windows\.NET Framework\.NET Framework NGEN v4.0.30319 64"
+    Write-Output 'Requesting 64-bit AutoNGEN -- Windows 8+' | timestamp
+    schTasks /run /Tn '\Microsoft\Windows\.NET Framework\.NET Framework NGEN v4.0.30319 64'
 }
 
-Write-Output "Ending dotnet optimization script..." | timestamp
-
-##########
-# future: use powershell filters to add date/time
-##########
-<#
-filter timestamp {"$(Get-Date -Format G): $_"}
-PS C:\> write-output "hello world" | timestamp
-8/10/2016 3:45:22 PM: hello world
-#>
-
-##########
-# future: remove stuff for old windows server versions; only need new dotnet4 stuff
-##########
+Write-Output 'Ending dotnet optimization script...' | timestamp
