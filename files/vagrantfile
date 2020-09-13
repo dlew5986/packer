@@ -6,10 +6,12 @@ Vagrant.configure("2") do |config|
   config.vm.guest = :windows
 
   config.vm.communicator = "winrm"
-  config.winrm.basic_auth_only = true
-  config.winrm.transport = "plaintext"
-  config.winrm.username = "vagrant"
+  config.winrm.username = "Administrator"
   config.winrm.password = "vagrant"
+  config.winrm.transport = :ssl
+  config.winrm.ssl_peer_verification = false
+  config.winrm.guest_port = 5986
+  #config.winrm.basic_auth_only = true
 
   config.vm.provider "virtualbox" do |vb|
     vb.gui = true
@@ -18,6 +20,7 @@ Vagrant.configure("2") do |config|
     vb.customize ["modifyvm", :id, "--vram", "128"]
     vb.customize ["modifyvm", :id, "--audio", "none"]
     vb.customize ["modifyvm", :id, "--vrde", "off"]
+    vb.customize ["modifyvm", :id, "--ioapic", "on"]
     vb.customize ["modifyvm", :id, "--clipboard", "bidirectional"]
     vb.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
     vb.customize ["setextradata", :id, "GUI/ScaleFactor", "2.0"]
