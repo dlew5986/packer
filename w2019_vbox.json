@@ -32,6 +32,7 @@
             "winrm_password": "vagrant",
             "winrm_use_ssl": true,
             "winrm_insecure": true,
+            "winrm_use_ntlm": true,
 
             "shutdown_command": "C:/Windows/Panther/Unattend/sysprep_shutdown.cmd",
             "shutdown_timeout": "1h",
