@@ -28,7 +28,7 @@
             ],
 
             "communicator": "winrm",
-            "winrm_username": "vagrant",
+            "winrm_username": "Administrator",
             "winrm_password": "vagrant",
             "winrm_use_ssl": true,
             "winrm_insecure": true,

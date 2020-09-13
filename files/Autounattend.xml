@@ -132,7 +132,7 @@
             <TimeZone>Eastern Standard Time</TimeZone>
             <UserAccounts>
                 <AdministratorPassword>
-                    <Value>beforeSysPrep</Value>
+                    <Value>vagrant</Value>
                     <PlainText>true</PlainText>
                 </AdministratorPassword>
                 <LocalAccounts>
@@ -150,7 +150,7 @@
             </UserAccounts>
             <AutoLogon>
                 <Enabled>true</Enabled>
-                <Username>vagrant</Username>
+                <Username>Administrator</Username>
                 <Password>
                     <Value>vagrant</Value>
                     <PlainText>true</PlainText>

@@ -36,7 +36,7 @@
             <TimeZone>Eastern Standard Time</TimeZone>
             <UserAccounts>
                 <AdministratorPassword>
-                    <Value>afterSysPrep</Value>
+                    <Value>vagrant</Value>
                     <PlainText>true</PlainText>
                 </AdministratorPassword>
             </UserAccounts>
