@@ -81,7 +81,7 @@
         {
             "type": "vagrant",
             "keep_input_artifact": false,
-            "output": "output/box_files/w2019_{{.Provider}}_{{isotime \"2006-01-02\"}}.box",
+            "output": "output/box_files/w2019_{{.Provider}}.box",
             "vagrantfile_template": "files/vagrantfile"
         }
     ]
