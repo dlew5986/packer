@@ -44,44 +44,45 @@
     "provisioners": [
         {
             "type": "powershell",
-            "script": "scripts/perform_dotnet_optimization.ps1",
-            "elevated_user": "{{user `winrm_username`}}",
-            "elevated_password": "{{user `winrm_password`}}",
-            "pause_before": "20s"
-        },
-        {
-            "type": "powershell",
-            "script": "scripts/install_vbox_guest_additions.ps1",
-            "elevated_user": "{{user `winrm_username`}}",
-            "elevated_password": "{{user `winrm_password`}}",
-            "only": ["virtualbox"],
-            "pause_before": "1m"
+            "script": "scripts/install_vbox_guest_additions.ps1"
         },
         {
             "type": "windows-restart",
-            "restart_timeout": "15m",
-            "pause_before": "1m"
+            "restart_timeout": "15m"
+        },
+        {
+            "type": "powershell",
+            "script": "scripts/install_nuget.ps1"
+        },
+        {
+            "type": "powershell",
+            "script": "scripts/install_windows_updates.ps1"
+        },
+        {
+            "type": "windows-restart",
+            "restart_timeout": "15m"
+        },
+        {
+            "type": "powershell",
+            "script": "scripts/perform_dotnet_optimization.ps1"
         },
         {
             "type": "powershell",
             "script": "scripts/prepare_SetupComplete.ps1",
             "elevated_user": "{{user `winrm_username`}}",
-            "elevated_password": "{{user `winrm_password`}}",
-            "pause_before": "1m"
+            "elevated_password": "{{user `winrm_password`}}"
         },
         {
             "type": "powershell",
             "script": "scripts/prepare_sysprep.ps1",
             "elevated_user": "{{user `winrm_username`}}",
-            "elevated_password": "{{user `winrm_password`}}",
-            "pause_before": "5s"
+            "elevated_password": "{{user `winrm_password`}}"
         }
     ],
 
     "post-processors": [
         {
             "type": "vagrant",
-            "keep_input_artifact": false,
             "output": "output/box_files/w2019_{{.Provider}}.box",
             "vagrantfile_template": "files/vagrantfile"
         }
