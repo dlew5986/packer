@@ -64,6 +64,14 @@
         },
         {
             "type": "powershell",
+            "script": "scripts/install_windows_updates.ps1"
+        },
+        {
+            "type": "windows-restart",
+            "restart_timeout": "15m"
+        },
+        {
+            "type": "powershell",
             "script": "scripts/perform_dotnet_optimization.ps1"
         },
         {
