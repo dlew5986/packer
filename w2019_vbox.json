@@ -77,14 +77,10 @@
         {
             "type": "powershell",
             "script": "scripts/prepare_SetupComplete.ps1",
-            "elevated_user": "{{user `winrm_username`}}",
-            "elevated_password": "{{user `winrm_password`}}"
         },
         {
             "type": "powershell",
             "script": "scripts/prepare_sysprep.ps1",
-            "elevated_user": "{{user `winrm_username`}}",
-            "elevated_password": "{{user `winrm_password`}}"
         }
     ],
 
