@@ -76,11 +76,11 @@
         },
         {
             "type": "powershell",
-            "script": "scripts/prepare_SetupComplete.ps1",
+            "script": "scripts/prepare_SetupComplete.ps1"
         },
         {
             "type": "powershell",
-            "script": "scripts/prepare_sysprep.ps1",
+            "script": "scripts/prepare_sysprep.ps1"
         }
     ],
 
