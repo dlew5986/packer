@@ -1,8 +1,4 @@
 
-# config winrm for basic auth
-# because the packer virtualbox builder doesn't seem to be able to use ntlm as of 2020-09-12
-winrm set winrm/config/service/auth '@{Basic="true"}'
-
 # disable the default firewall rules for WinRM
 Disable-NetFirewallRule -DisplayGroup 'Windows Remote Management' -Confirm:$false
 
