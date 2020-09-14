@@ -27,7 +27,7 @@ Remove-WSManInstance @removeWinRmListenerParams
 # create self-signed cert
 $selfSignedCertParams = @{
     CertStoreLocation = 'Cert:\LocalMachine\My'
-    DnsName           = 'packer-ami'
+    DnsName           = 'packer-vbox'
     HashAlgorith      = 'sha256'
     KeyAlgorithm      = 'RSA'
     KeyLength         = 4096
