@@ -47,6 +47,19 @@
             "script": "scripts/config_firewall.ps1"
         },
         {
+            "type": "file",
+            "source": "tests",
+            "destination": "C:/Windows/Temp",
+            "direction": "upload"
+        },
+        {
+            "type": "powershell",
+            "scripts": [
+                "scripts/invoke_pester_tests.ps1",
+                "scripts/evaluate_pester_results.ps1"
+            ]
+        },
+        {
             "type": "powershell",
             "inline": [
                 "C:\\ProgramData\\Amazon\\EC2-Windows\\Launch\\Scripts\\InitializeInstance.ps1 -Schedule",
