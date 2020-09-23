@@ -36,14 +36,14 @@ $RdpUdpParams = @{
 }
 New-NetFirewallRule @RdpUdpParams | Out-Null
 
-# disable listed firewall groups
-$displayGroupsToDisable = @(
-    'AllJoyn Router'
-    'Cast to Device functionality'
-    'Delivery Optimization'
-    'DIAL protocol server'
-    'mDNS'
-    'Remote Desktop'
-    'Windows Remote Management'
+# disable all the other inbound firewall rules except that which should be enabled
+$displayGroupsThatShouldBeEnabled = @(
+    'Core Networking'
+    'Custom'
 )
-Disable-NetFirewallrule -DisplayGroup $displayGroupsToDisable -Confirm:$false
+$rules = Get-NetFirewallRule -Direction Inbound | Where-Object { $displayGroupsThatShouldBeEnabled -notcontains $_.DisplayGroup }
+
+foreach ($rule in $rules)
+{
+    Disable-NetFirewallrule -DisplayGroup $rule.DisplayGroup -Confirm:$false
+}
