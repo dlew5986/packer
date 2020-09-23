@@ -66,6 +66,20 @@
             "type": "powershell",
             "scripts": [
                 "scripts/perform_dotnet_optimization.ps1",
+                "scripts/config_firewall.ps1"
+            ]
+        },
+        {
+            "type": "file",
+            "source": "tests",
+            "destination": "C:/Windows/Temp",
+            "direction": "upload"
+        },
+        {
+            "type": "powershell",
+            "scripts": [
+                "scripts/invoke_pester_tests.ps1",
+                "scripts/evaluate_pester_results.ps1",
                 "scripts/prepare_SetupComplete.ps1",
                 "scripts/prepare_sysprep.ps1"
             ]
