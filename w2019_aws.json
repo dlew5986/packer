@@ -19,7 +19,7 @@
                 "most_recent": true
             },
             "temporary_security_group_source_cidrs": ["{{user `source_cidr`}}"],
-            "user_data_file": "scripts/user_data.ps1",
+            "user_data_file": "scripts/user_data_aws.ps1",
 
             "communicator": "winrm",
             "winrm_username": "Administrator",
