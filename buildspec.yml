@@ -1,0 +1,22 @@
+---
+version: 0.2
+
+env:
+  variables:
+    PACKER_VERSION: 1.6.2
+
+phases:
+  install:
+    commands:
+      - curl -qL -s -o packer.zip https://releases.hashicorp.com/packer/${PACKER_VERSION}/packer_${PACKER_VERSION}_linux_amd64.zip && unzip -q packer.zip
+  pre_build:
+    commands:
+      - export SOURCE_CIDR=$(curl -s ifconfig.co)/32
+      - echo "source cidr    = ${SOURCE_CIDR}" && echo "aws region     = ${AWS_REGION}" && echo "packer version = $(./packer --version)"
+      - ./packer validate w2019_aws_codebuild.json
+  build:
+    commands:
+      - ./packer build w2019_aws_codebuild.json
+  post_build:
+    commands:
+      - echo "$(date +%FT%T)...and that's all she wrote."

@@ -1,0 +1,71 @@
+{
+    "variables":
+        {
+            "aws_region": "{{env `AWS_REGION`}}",
+            "source_cidr": "{{env `SOURCE_CIDR`}}"
+        },
+
+    "builders": [
+        {
+            "name": "ami",
+            "type": "amazon-ebs",
+            "region": "{{user `aws_region`}}",
+
+            "ami_name": "packer-Windows_Server-2019-English-Full-Base-{{isotime | clean_resource_name}}",
+            "instance_type": "t2.micro",
+            "source_ami_filter": {
+                "filters": { "name": "Windows_Server-2019-English-Full-Base-*" },
+                "owners": ["amazon"],
+                "most_recent": true
+            },
+            "temporary_security_group_source_cidrs": ["{{user `source_cidr`}}"],
+            "user_data_file": "scripts/user_data_aws.ps1",
+
+            "communicator": "winrm",
+            "winrm_username": "Administrator",
+            "winrm_use_ssl": true,
+            "winrm_insecure": true,
+            "winrm_use_ntlm": true,
+
+            "tags": {
+                "Name": "packer",
+                "project": "packer",
+                "platform": "windows_server",
+                "version": "2019"
+            },
+            "snapshot_tags": {
+                "project": "packer",
+                "platform": "windows_server",
+                "version": "2019"
+            }
+        }
+    ],
+
+    "provisioners": [
+        {
+            "type": "powershell",
+            "script": "scripts/config_firewall.ps1"
+        },
+        {
+            "type": "file",
+            "source": "tests",
+            "destination": "C:/Windows/Temp",
+            "direction": "upload"
+        },
+        {
+            "type": "powershell",
+            "scripts": [
+                "scripts/invoke_pester_tests.ps1",
+                "scripts/evaluate_pester_results.ps1"
+            ]
+        },
+        {
+            "type": "powershell",
+            "inline": [
+                "C:\\ProgramData\\Amazon\\EC2-Windows\\Launch\\Scripts\\InitializeInstance.ps1 -Schedule",
+                "C:\\ProgramData\\Amazon\\EC2-Windows\\Launch\\Scripts\\SysprepInstance.ps1 -NoShutdown"
+            ]
+        }
+    ]
+
+}
