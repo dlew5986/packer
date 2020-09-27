@@ -20,11 +20,11 @@
             ],
             "floppy_files": [
                 "files/Autounattend.xml",
-                "files/winrm.ps1",
+                "files/SetupComplete.cmd",
+                "files/SetupComplete.ps1",
                 "files/sysprep_unattend.xml",
                 "files/sysprep_shutdown.cmd",
-                "files/SetupComplete.cmd",
-                "files/SetupComplete.ps1"
+                "files/user_data_vbox.ps1"
             ],
 
             "communicator": "winrm",

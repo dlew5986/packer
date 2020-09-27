@@ -146,7 +146,7 @@
             </AutoLogon>
             <FirstLogonCommands>
                 <SynchronousCommand wcm:action="add">
-                    <CommandLine>C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -File A:\winrm.ps1</CommandLine>
+                    <CommandLine>C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -File A:\user_data_vbox.ps1</CommandLine>
                     <Order>1</Order>
                 </SynchronousCommand>
             </FirstLogonCommands>
