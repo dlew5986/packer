@@ -49,3 +49,6 @@ $newWinRmListenerParams = @{
     }
 }
 New-WSManInstance @newWinRmListenerParams
+
+# turn off network discovery
+New-Item -Path 'HKLM:\System\CurrentControlSet\Control\Network\NewNetworkWindowOff\' -Force
