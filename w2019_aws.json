@@ -8,7 +8,6 @@
         {
             "name": "ami",
             "type": "amazon-ebs",
-            "profile": "default",
             "region": "us-east-2",
 
             "ami_name": "packer-Windows_Server-2019-English-Full-Base-{{isotime | clean_resource_name}}",
