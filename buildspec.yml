@@ -13,10 +13,10 @@ phases:
     commands:
       - export SOURCE_CIDR=$(curl -s ifconfig.co)/32
       - echo "source cidr    = ${SOURCE_CIDR}" && echo "aws region     = ${AWS_REGION}" && echo "packer version = $(./packer --version)"
-      - ./packer validate w2019_aws_codebuild.json
+      - ./packer validate w2019_aws.json
   build:
     commands:
-      - ./packer build w2019_aws_codebuild.json
+      - ./packer build w2019_aws.json
   post_build:
     commands:
       - echo "$(date +%FT%T)...and that's all she wrote."
