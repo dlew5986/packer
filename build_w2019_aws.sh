@@ -7,16 +7,15 @@ set -e
 startDateTimeStamp=$(date +%FT%T)
 start=$SECONDS
 
-# get external ip in CIDR notation
-ip=$(dig +short myip.opendns.com @resolver1.opendns.com)
-cidr=$ip/32
-echo "cidr = ${cidr}"
+# export external ip in CIDR notation
+export SOURCE_CIDR=$(curl -s ifconfig.co)/32
+echo "source_cidr = ${SOURCE_CIDR}"
 
 # validate
-packer validate -var "source_cidr=${cidr}" ./w2019_aws.json
+packer validate w2019_aws.json
 
 # build
-packer build -var "source_cidr=${cidr}" -force ./w2019_aws.json
+packer build w2019_aws.json
 
 # record end and calculate runtime duration
 end=$SECONDS
