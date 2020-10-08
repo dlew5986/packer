@@ -3,7 +3,7 @@ version: 0.2
 
 env:
   variables:
-    PACKER_VERSION: 1.6.2
+    PACKER_VERSION: 1.6.4
 
 phases:
   install:
