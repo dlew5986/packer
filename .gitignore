@@ -4,12 +4,6 @@ packer_cache/
 # Crash log
 crash.log
 
-# For built boxes
-*.box
-
 # above this is default
 # below this is dlew
-iso/
-output/
 *DS_Store
-examples
