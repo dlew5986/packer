@@ -4,9 +4,6 @@ packer_cache/
 # Crash log
 crash.log
 
-# For built boxes
-*.box
-
 # macOS
 *DS_Store
 
