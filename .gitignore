@@ -4,6 +4,19 @@ packer_cache/
 # Crash log
 crash.log
 
-# above this is default
-# below this is dlew
+# For built boxes
+*.box
+
+# macOS
 *DS_Store
+
+#  Local .terraform directories
+**/.terraform/*
+
+# .tfstate files
+*.tfstate
+*.tfstate.*
+
+# .tfvars files
+*.tfvars
+*.tfvars.json
