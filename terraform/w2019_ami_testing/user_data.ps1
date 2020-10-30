@@ -1,4 +1,5 @@
 <powershell>
+#Requires -RunAsAdministrator
 
 # disable default firewall rules for Remote Desktop
 # new, non-system-defined firewall rules were added to the source packer ami
