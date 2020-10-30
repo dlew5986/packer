@@ -29,6 +29,7 @@ resource "aws_instance" "instance" {
   ami                    = data.aws_ami.source_ami.id
   instance_type          = "t2.micro"
   key_name               = "windowsKeyPair"
+  user_data              = file("user_data.ps1")
   vpc_security_group_ids = [aws_security_group.security_group.id]
   tags = {
     Name = "packer-testing",
