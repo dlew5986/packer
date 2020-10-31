@@ -41,6 +41,7 @@ $displayGroupsThatShouldBeEnabled = @(
     'Core Networking'
     'Custom'
 )
+
 $rules = Get-NetFirewallRule -Direction Inbound | Where-Object { $displayGroupsThatShouldBeEnabled -notcontains $_.DisplayGroup }
 
 foreach ($rule in $rules)
