@@ -1,6 +1,6 @@
 #Requires -RunAsAdministrator
 
-Configuration PackerConfig
+Configuration DscConfig
 {
     param (
         [string[]]$NodeName = 'localhost'
@@ -28,11 +28,11 @@ Configuration PackerConfig
 }
 
 # create the mof file
-$packerConfigParams = @{
+$dscConfigParams = @{
     NodeName   = 'localhost'
-    OutputPath = 'C:\Configs'
+    OutputPath = 'C:\dsc'
 }
-PackerConfig @packerConfigParams
+DscConfig @dscConfigParams
 
 # create a cim session to be fed into Start-DscConfiguration
 # by default Start-DscConfiguration establishes an http-based WinRM session
@@ -44,7 +44,7 @@ $session = New-CimSession
 # invoke the lcm to process the mof file
 $startParams = @{
     CimSession   = $session
-    Path         = 'C:\Configs'    
+    Path         = 'C:\dsc'
     Verbose      = $true
     Wait         = $true
 }
