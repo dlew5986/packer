@@ -6,6 +6,7 @@ Disable-NetFirewallRule -DisplayGroup 'Windows Remote Management' -Confirm:$fals
 
 # new firewall rule to allow WinRM 5986/tcp inbound
 $WinRmHttpsParams = @{
+    Name          = 'AllowWinRmInboundOnTcp5986'
     DisplayName   = 'allow WinRM inbound on 5986/tcp'
     Group         = 'Custom'
     Direction     = 'Inbound'
