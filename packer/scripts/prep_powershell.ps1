@@ -8,7 +8,6 @@ $nugetParams = @{
     Name    = 'NuGet'
     Scope   = 'AllUsers'
     Force   = $true
-    Verbose = $true
 }
 Install-PackageProvider @nugetParams
 
@@ -17,6 +16,5 @@ $modulesParams = @{
     Name    = 'PSDscResources','NetworkingDsc'
     Scope   = 'AllUsers'
     Force   = $true
-    Verbose = $true
 }
 Install-Module @modulesParams
