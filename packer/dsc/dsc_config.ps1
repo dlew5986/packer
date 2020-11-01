@@ -27,6 +27,13 @@ Configuration DscConfig
             TimeZone         = 'Eastern Standard Time'
         }
 
+        SmbServerConfiguration DisableSmb1
+        {
+            IsSingleInstance                = 'Yes'
+            AuditSmb1Access                 = $false
+            EnableSMB1Protocol              = $false
+        }
+
         NetBios DisableNetBios
         {
             InterfaceAlias = '*'
