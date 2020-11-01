@@ -40,6 +40,13 @@ Configuration DscConfig
             Enabled = $false
         }
 
+        RemoteDesktopAdmin RemoteDesktopSettings
+        {
+            IsSingleInstance   = 'yes'
+            Ensure             = 'Present'
+            UserAuthentication = 'Secure'
+        }
+
         NetBios DisableNetBios
         {
             InterfaceAlias = '*'
