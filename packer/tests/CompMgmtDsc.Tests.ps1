@@ -9,4 +9,18 @@ Describe "ComputerManagementDsc Validation" {
 
     }
 
+    Context "Remote Desktop Settings" {
+
+        It "remote desktop should be present" {
+            $registryKey = 'HKLM:\System\CurrentControlSet\Control\Terminal Server'
+            (Get-ItemProperty -Path $registryKey).fDenyTSConnections | should be 0
+        }
+
+        It "user authentication should be 'secure' (aka Network Level Authentication)" {
+            $registryKey = 'HKLM:\System\CurrentControlSet\Control\Terminal Server\WinStations\RDP-Tcp'
+            (Get-ItemProperty -Path $registryKey).UserAuthentication | should be 1
+        }
+
+    }
+
 }
