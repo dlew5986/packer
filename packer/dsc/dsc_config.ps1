@@ -36,8 +36,9 @@ Configuration DscConfig
 
         IEEnhancedSecurityConfiguration DisableForAdministrators
         {
-            Role    = 'Administrators'
-            Enabled = $false
+            Role            = 'Administrators'
+            Enabled         = $false
+            SuppressRestart = $true
         }
 
         RemoteDesktopAdmin RemoteDesktopSettings
