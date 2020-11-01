@@ -29,9 +29,15 @@ Configuration DscConfig
 
         SmbServerConfiguration DisableSmb1
         {
-            IsSingleInstance                = 'Yes'
-            AuditSmb1Access                 = $false
-            EnableSMB1Protocol              = $false
+            IsSingleInstance   = 'Yes'
+            AuditSmb1Access    = $false
+            EnableSMB1Protocol = $false
+        }
+
+        IEEnhancedSecurityConfiguration DisableForAdministrators
+        {
+            Role    = 'Administrators'
+            Enabled = $false
         }
 
         NetBios DisableNetBios
@@ -139,9 +145,9 @@ Configuration DscConfig
         {
             Firewall $rule.Name
             {
-                Name          = $rule.Name
-                Ensure        = 'Present'
-                Enabled       = 'False'
+                Name    = $rule.Name
+                Ensure  = 'Present'
+                Enabled = 'False'
             }
         }
         
