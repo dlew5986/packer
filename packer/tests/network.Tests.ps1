@@ -6,7 +6,7 @@ Describe "Network Validation" {
 
         foreach ($netAdapter in $netAdapters)
         {
-            It "[$($netAdapter.Description)][Index $($netAdapter.Index)] NetBIOS over TCPIP should be disabled" {
+            It "[$($netAdapter.Description)] NetBIOS over TCPIP should be disabled" {
                 $netAdapter.TcpipNetbiosOptions | should be 2
             }
         }
