@@ -1,5 +1,6 @@
 #Requires -RunAsAdministrator
 #Requires -module NetworkingDsc
+#Requires -module ComputerManagementDsc
 
 Configuration DscConfig
 {
@@ -9,6 +10,7 @@ Configuration DscConfig
 
     Import-DscResource -ModuleName PSDesiredStateConfiguration
     Import-DscResource -ModuleName NetworkingDsc
+    Import-DscResource -ModuleName ComputerManagementDsc
 
     Node $NodeName
     {
@@ -17,6 +19,12 @@ Configuration DscConfig
             Name        = 'Spooler'
             StartupType = 'Manual'
             State       = 'Stopped'
+        }
+
+        TimeZone SetTimeZone
+        {
+            IsSingleInstance = 'Yes'
+            TimeZone         = 'Eastern Standard Time'
         }
 
         NetBios DisableNetBios
@@ -117,6 +125,7 @@ Configuration DscConfig
             'Custom'
         )
 
+        # firewall rules that should be disabled
         $rules = Get-NetFirewallRule  -Direction Inbound -Enabled True | Where-Object { $displayGroupsThatShouldBeEnabled -notcontains $_.DisplayGroup }
 
         foreach ($rule in $rules)

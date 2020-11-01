@@ -11,9 +11,16 @@ $nugetParams = @{
 }
 Install-PackageProvider @nugetParams
 
-# install various modules from the PowerShell Gallery
+# modules to install
+$modulesToInstall = @(
+    'PSDscResources'
+    'NetworkingDsc'
+    'ComputerManagementDsc'
+)
+
+# install modules from the PowerShell Gallery
 $modulesParams = @{
-    Name    = 'PSDscResources','NetworkingDsc'
+    Name    = $modulesToInstall
     Scope   = 'AllUsers'
     Force   = $true
 }
