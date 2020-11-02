@@ -46,6 +46,7 @@
             "type": "powershell",
             "scripts": [
                 "scripts/prep_powershell.ps1",
+                "scripts/prep_gui.ps1",
                 "dsc/dsc_config.ps1"
             ]
         },

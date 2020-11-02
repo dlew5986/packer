@@ -1,4 +1,5 @@
 #Requires -RunAsAdministrator
+#Requires -module PSDesiredStateConfiguration
 #Requires -module NetworkingDsc
 #Requires -module ComputerManagementDsc
 
@@ -19,6 +20,14 @@ Configuration DscConfig
             Name        = 'Spooler'
             StartupType = 'Manual'
             State       = 'Stopped'
+        }
+
+        Registry TurnOffNetworkDiscovery
+        {
+            Key       = 'HKLM:\System\CurrentControlSet\Control\Network\NewNetworkWindowOff'
+            Ensure    = 'Present'
+            ValueName = ''
+            Force     = $true
         }
 
         TimeZone SetTimeZone
@@ -141,15 +150,16 @@ Configuration DscConfig
             Action        = 'Allow'
         }
 
+        # move this to ConfigurationData eventually
         $displayGroupsThatShouldBeEnabled = @(
             'Core Networking'
             'Custom'
         )
 
         # firewall rules that should be disabled
-        $rules = Get-NetFirewallRule  -Direction Inbound -Enabled True | Where-Object { $displayGroupsThatShouldBeEnabled -notcontains $_.DisplayGroup }
+        $rulesToDisable = Get-NetFirewallRule  -Direction Inbound -Enabled True | Where-Object { $displayGroupsThatShouldBeEnabled -notcontains $_.DisplayGroup }
 
-        foreach ($rule in $rules)
+        foreach ($rule in $rulesToDisable)
         {
             Firewall $rule.Name
             {
@@ -158,8 +168,9 @@ Configuration DscConfig
                 Enabled = 'False'
             }
         }
-        
+
     }
+
 }
 
 # create the mof file
