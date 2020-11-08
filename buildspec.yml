@@ -8,6 +8,7 @@ env:
 phases:
   install:
     commands:
+      - cd ./packer
       - curl -qL -s -o packer.zip https://releases.hashicorp.com/packer/${PACKER_VERSION}/packer_${PACKER_VERSION}_linux_amd64.zip && unzip -q packer.zip
   pre_build:
     commands:
