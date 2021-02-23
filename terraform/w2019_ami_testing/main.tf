@@ -32,9 +32,9 @@ resource "aws_instance" "instance" {
   user_data              = file("user_data.ps1")
   vpc_security_group_ids = [aws_security_group.security_group.id]
   tags = {
-    Name = "packer-testing",
-    project = "packer",
+    Name     = "packer-testing",
+    project  = "packer",
     platform = "windows_server",
-    version = "2019"
+    version  = "2019"
   }
 }
