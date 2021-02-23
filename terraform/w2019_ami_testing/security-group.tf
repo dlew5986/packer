@@ -2,11 +2,11 @@ resource "aws_security_group" "security_group" {
   name        = "w2019_ami_testing"
   description = "Collection of base rules for windows server"
   vpc_id      = data.aws_vpc.vpc_default.id
-  tags        = {
-    Name      = "packer-testing"
-    project   = "packer"
-    platform  = "windows_server"
-    version   = "2019"
+  tags = {
+    Name     = "packer-testing"
+    project  = "packer"
+    platform = "windows_server"
+    version  = "2019"
   }
 
   # allow ICMPv4 echo
