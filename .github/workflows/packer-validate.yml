@@ -1,0 +1,50 @@
+name: Validate
+
+on:
+  pull_request:
+    branches: [ main ]
+  push:
+  workflow_dispatch:
+
+jobs:
+  validate:
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+
+      - uses: actions/checkout@v2
+
+      - name: info
+        run: |
+          echo "The job was triggered by a ${{ github.event_name }} event."
+          echo "The branch is ${{ github.ref }}."
+          echo "The repository is ${{ github.repository }}."
+
+#      - name: validate syntax only
+#        uses: hashicorp/packer-github-actions@master
+#        with:
+#          command: validate
+#          arguments: -syntax-only
+#          working_directory: packer
+#          target: w2019_aws.json
+
+#      - name: validate
+#        uses: hashicorp/packer-github-actions@master
+#        with:
+#          command: validate
+#          working_directory: packer
+#          target: w2019_aws.json
+#        env: 
+#          AWS_REGION: us-east-2
+#          SOURCE_CIDR: 10.10.10.10/32
+
+      - name: validate
+        run: |
+          packer --version
+          cd packer
+          packer validate w2019_aws.json
+        env: 
+          AWS_REGION: us-east-2
+          SOURCE_CIDR: 10.10.10.10/32
