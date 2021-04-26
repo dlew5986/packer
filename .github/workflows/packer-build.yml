@@ -1,0 +1,19 @@
+name: Build
+on: [pull_request, workflow_dispatch]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: packer version
+        run: packer --version
+
+      - name: packer validate
+        run: |
+          cd packer
+          packer validate w2019_aws.json
+        env: 
+          AWS_REGION: us-east-2
+          SOURCE_CIDR: 10.10.10.10/32
