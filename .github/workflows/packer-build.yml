@@ -10,10 +10,19 @@ jobs:
       - name: packer version
         run: packer --version
 
+      - name: source cidr
+        run: echo "SOURCE_CIDR=$(curl -s ifconfig.co)/32" >> $GITHUB_ENV
+
       - name: packer validate
         run: |
           cd packer
           packer validate w2019_aws.json
         env: 
           AWS_REGION: us-east-2
-          SOURCE_CIDR: 10.10.10.10/32
+
+#      - name: packer build
+#        run: |
+#          cd packer
+#          packer build w2019_aws.json
+#        env: 
+#          AWS_REGION: us-east-2
