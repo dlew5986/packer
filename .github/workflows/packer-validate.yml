@@ -17,5 +17,3 @@ jobs:
         run: |
           cd packer
           packer validate w2019_aws.json
-        env: 
-          AWS_REGION: us-east-2
