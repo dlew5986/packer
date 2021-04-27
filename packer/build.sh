@@ -8,13 +8,13 @@ startDateTimeStamp=$(date +%FT%T)
 start=$SECONDS
 
 # export aws region
-export AWS_REGION=us-east-2
+#export AWS_REGION=us-east-2
 
 # export external ip in CIDR notation
 export SOURCE_CIDR=$(curl -s ifconfig.co)/32
 
 # echo
-echo "aws_region  = ${AWS_REGION}"
+#echo "aws_region  = ${AWS_REGION}"
 echo "source_cidr = ${SOURCE_CIDR}"
 
 # validate
