@@ -1,7 +1,6 @@
 {
     "variables":
         {
-            "aws_region": "{{env `AWS_REGION`}}",
             "source_cidr": "{{env `SOURCE_CIDR`}}"
         },
 
@@ -9,7 +8,7 @@
         {
             "name": "ami",
             "type": "amazon-ebs",
-            "region": "{{user `aws_region`}}",
+            "region": "us-east-2",
 
             "ami_name": "packer-Windows_Server-2019-English-Full-Base-{{isotime | clean_resource_name}}",
             "instance_type": "t2.micro",
