@@ -1,5 +1,12 @@
 terraform {
-  required_version = ">= 0.13, < 0.14"
+  backend "s3" {
+    bucket         = "tf-state-packer-aws-ami"
+    dynamodb_table = "tf-state-packer-aws-ami-locks"
+    encrypt        = true
+    key            = "w2019/terraform.tfstate"
+    region         = "us-east-2"
+  }
+
   required_providers {
     aws = {
       source  = "hashicorp/aws"
