@@ -1,4 +1,4 @@
-name: packer build
+name: packer build red
 on: workflow_dispatch
 jobs:
   packer-build:
