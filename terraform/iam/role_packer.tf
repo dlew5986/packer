@@ -1,10 +1,10 @@
 data "aws_iam_policy_document" "assume_role" {
   statement {
+    actions = ["sts:AssumeRole", "sts:TagSession"]
     principals {
       type        = "AWS"
-      identifiers = [var.principal_arn_umbrella]
+      identifiers = [var.user_arn]
     }
-    actions = ["sts:AssumeRole"]
   }
 }
 
