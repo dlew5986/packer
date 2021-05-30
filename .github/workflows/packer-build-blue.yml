@@ -1,0 +1,33 @@
+name: packer build blue
+on: workflow_dispatch
+jobs:
+  packer-build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: packer version
+        run: packer --version
+
+      - name: source cidr
+        run: echo "SOURCE_CIDR=$(curl -s ifconfig.co)/32" >> $GITHUB_ENV
+
+      - name: packer validate
+        run: |
+          cd packer
+          packer validate w2019_aws.json
+
+      - name: set aws creds
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-east-2
+          role-to-assume: ${{ secrets.ASSUME_ROLE_ARN_BLUE }}
+          role-duration-seconds: 3600
+
+      - name: packer build
+        run: |
+          cd packer
+          packer build w2019_aws.json
