@@ -6,6 +6,6 @@ variable "assume_role_arn_blue" {
   type = string
 }
 
-variable "principal_arn_umbrella" {
+variable "user_arn" {
   type = string
 }
