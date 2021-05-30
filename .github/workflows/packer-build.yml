@@ -27,10 +27,7 @@ jobs:
           role-to-assume: ${{ secrets.ASSUME_ROLE_ARN_RED }}
           role-duration-seconds: 3600
 
-#      - name: packer build
-#        run: |
-#          cd packer
-#          packer build w2019_aws.json
-
-      - name: packer version
-        run: packer --version
+      - name: packer build
+        run: |
+          cd packer
+          packer build w2019_aws.json
