@@ -191,7 +191,7 @@ $startParams = @{
     CimSession   = $session
     Path         = 'C:\dsc'
     Force        = $true
-    Verbose      = $true
+    #Verbose      = $true
     Wait         = $true
 }
 Start-DscConfiguration @startParams
