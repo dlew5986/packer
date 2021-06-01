@@ -12,13 +12,24 @@
 
             "ami_name": "packer-Windows_Server-2019-English-Full-Base-{{isotime | clean_resource_name}}",
             "instance_type": "t2.micro",
+            "temporary_security_group_source_cidrs": ["{{user `source_cidr`}}"],
+            "user_data_file": "scripts/user_data_aws.ps1",
+
             "source_ami_filter": {
                 "filters": { "name": "Windows_Server-2019-English-Full-Base-*" },
                 "owners": ["amazon"],
                 "most_recent": true
             },
-            "temporary_security_group_source_cidrs": ["{{user `source_cidr`}}"],
-            "user_data_file": "scripts/user_data_aws.ps1",
+
+            "no_ephemeral": true,
+            "launch_block_device_mappings": [
+                {
+                    "device_name": "/dev/sda1",
+                    "volume_size": 100,
+                    "encrypted": true,
+                    "delete_on_termination": true
+                }
+            ],
 
             "communicator": "winrm",
             "winrm_username": "Administrator",
